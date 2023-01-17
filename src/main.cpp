@@ -75,7 +75,7 @@ void setup() {
   delay(100);
 
   // Connect to WiFi
- mqtt_client.connect(ca_cert,client_id,);
+connect_wifi();
   
   // Configure MQTT server
 mqtt_client.setServer(mqtt_server, mqtt_port);
@@ -111,8 +111,8 @@ client.setCACert(ca_cert);
   }
 
   // Send data to the broker with MQTT
-  // ...
-
+ mqtt_client.connect(client_id,mqtt_user,mqtt_pass);
+  Serial.println(mqtt_client.connect(client_id,mqtt_user,mqtt_pass));
   Serial.println("Going to sleep for 5 seconds...");
   delay(100);
   ESP.deepSleep(5e6);
