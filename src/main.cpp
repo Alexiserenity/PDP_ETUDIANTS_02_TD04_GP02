@@ -5,8 +5,8 @@
 #include "WiFiClientSecure.h"
 #include <PubSubClient.h>
 
-const char* wifi_ssid = "iPhone de Adrien";
-const char* wifi_password = "11111111";
+const char* wifi_ssid = "Pixel 7 Alexis";
+const char* wifi_password = "00000000";
 const char* mqtt_server = "27cc61dbaffc4da08cd0081cabd8cf01.s2.eu.hivemq.cloud";
 int mqtt_port = 8883;
 const char* mqtt_user = "ocres4ever";
@@ -116,6 +116,14 @@ client.setCACert(ca_cert);
   Serial.println("Going to sleep for 5 seconds...");
   delay(100);
   ESP.deepSleep(5e6);
+
+
+  if(mqtt_client.connect(client_id,mqtt_user,mqtt_pass))
+  {
+   mqtt_client.publish("TD04_GP02/relhum",String(relative_humidity_measure).c_str());
+    mqtt_client.publish("TD04_GP02/temp",String(temp_measure).c_str());
+  }
+
 }
 
 void loop() {
